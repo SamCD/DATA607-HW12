@@ -1,0 +1,32 @@
+---
+title: "HW12 Sam Cohendevrief"
+author: "Sam CD"
+date: "November 19, 2017"
+output: html_document
+---
+```{r}
+library(RMySQL)
+library(rmongodb)
+
+mydb = dbConnect(MySQL(), user='user', password='password', dbname='dataScienceSkills', host='localhost')
+# connect to MongoDB
+mongo = mongo.create(host = "localhost")
+# test the connection
+mongo.is.connected(mongo)
+
+query <- "select * from dataJobs;"
+dt <- dbGetQuery(con, query)
+
+query <- "select * from cbJobs;"
+cb <- dbGetQuery(con, query)
+
+query <- "select * from diceJobs;"
+dice <- dbGetQuery(con, query)
+
+dbDisconnect(con)
+dbUnloadDriver(drv)
+
+b.dt=mongo.bson.from.df(dt)
+b.cb=mongo.bson.from.df(cb)
+b.dice=mongo.bson.from.df(dice)
+```
